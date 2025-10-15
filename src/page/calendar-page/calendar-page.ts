@@ -52,7 +52,7 @@ export class CalendarPage {
   }
 
   /**
-   * Cleanup the FullCalendar instance including all handlersnpm i.
+   * Cleanup the FullCalendar instance including all handlers.
    */
   async destroyCalendar(): Promise<void> {
     if (this.calendar) {
