@@ -1,0 +1,29 @@
+/* When using css-module, set .active
+as a global class name */
+:global(.active) {
+  color: var(--text-color-primary);
+  background-color: var(--background-color);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  /* COLORS */
+  --background-color: #e0e1dd;
+  --text-color-primary: #0d1b2a;
+  --text-color-secondary: #1b263b;
+  --main-color: #415A77;
+  --hover-color: #778DA9;
+  --white: #ffffff;
+  --black: #000000;
+
+  // calendar colors
+
+  /* SIZES */
+  --border-radius: 8px;
+}

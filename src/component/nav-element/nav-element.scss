@@ -1,0 +1,25 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: black;
+  padding: 1rem;
+
+  .vbs-logo {
+    height: 24px;
+    width: 24px;
+    border-radius: var(--border-radius);
+  }
+
+  a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+  }
+
+  a:hover {
+    background-color: var(--hover-color);
+    color: var(--text-color-primary);
+  }
+}
