@@ -23,6 +23,7 @@
     "@types/node": "^22.10.2",
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
+    "openapi-typescript-codegen": "^0.29.0",
     "sass": "^1.83.0",
     "stylelint": "^16.12.0",
     "stylelint-config-css-modules": "^4.4.0",

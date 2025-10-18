@@ -1,0 +1,535 @@
+---
+openapi: 3.1.0
+components:
+  schemas:
+    Booking:
+      type: object
+      required:
+      - vehicle
+      - user
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+        vehicle:
+          $ref: "#/components/schemas/Vehicle"
+        user:
+          $ref: "#/components/schemas/User"
+        startDate:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        endDate:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        created:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        updated:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+    BookingDTO:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+          description: The unique identifier of the booking
+          default: 1
+        vehicleId:
+          type:
+          - integer
+          - "null"
+          format: int64
+          description: The unique identifier of the vehicle
+          default: 1
+        userId:
+          type:
+          - integer
+          - "null"
+          format: int64
+          description: The unique identifier of the user
+          default: 1
+        startDate:
+          type:
+          - string
+          - "null"
+          description: The start date of the booking
+          default: 2025-05-01T10:00:00
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        endDate:
+          type:
+          - string
+          - "null"
+          description: The end date of the booking
+          default: 2025-05-02T12:00:00
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+    LocalDateTime:
+      type: string
+      format: date-time
+      examples:
+      - 2022-03-10T12:15:50
+    User:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+        email:
+          type:
+          - string
+          - "null"
+        firstName:
+          type:
+          - string
+          - "null"
+        lastName:
+          type:
+          - string
+          - "null"
+        created:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        updated:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+          description: The unique identifier of the user
+          default: 1
+        email:
+          type:
+          - string
+          - "null"
+          description: The email address of the user
+          default: user@example.com
+        firstName:
+          type:
+          - string
+          - "null"
+          description: The first name of the user
+          default: John
+        lastName:
+          type:
+          - string
+          - "null"
+          description: The last name of the user
+          default: Doe
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+        vin:
+          type:
+          - string
+          - "null"
+        licensePlate:
+          type:
+          - string
+          - "null"
+        name:
+          type:
+          - string
+          - "null"
+        manufacturer:
+          type:
+          - string
+          - "null"
+        model:
+          type:
+          - string
+          - "null"
+        created:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+        updated:
+          anyOf:
+          - $ref: "#/components/schemas/LocalDateTime"
+          - type: "null"
+    VehicleDTO:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - "null"
+          format: int64
+          description: The unique identifier of the vehicle
+          default: 1
+        vin:
+          type:
+          - string
+          - "null"
+          description: The Vehicle Identification Number
+          default: JT6HF10U3Y0133607
+        licensePlate:
+          type:
+          - string
+          - "null"
+          description: The license plate of the vehicle
+          default: B-BB-1234
+        name:
+          type:
+          - string
+          - "null"
+          description: The name of the vehicle
+          default: Aygoya
+        manufacturer:
+          type:
+          - string
+          - "null"
+          description: The manufacturer of the vehicle
+          default: Toyota
+        model:
+          type:
+          - string
+          - "null"
+          description: The model of the vehicle
+          default: Aygo
+paths:
+  /booking:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+      summary: Get Bookings
+      tags:
+      - Booking Resource
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingDTO"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Delete Booking
+      tags:
+      - Booking Resource
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "400":
+          description: Bad Request
+      summary: Create Booking
+      tags:
+      - Booking Resource
+  /booking/id/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+      summary: Get Booking By Id
+      tags:
+      - Booking Resource
+  /booking/page:
+    get:
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+      summary: Get Bookings By Page
+      tags:
+      - Booking Resource
+  /user:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad Request
+      summary: Update User
+      tags:
+      - User Resource
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+      summary: Get Users
+      tags:
+      - User Resource
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Delete User
+      tags:
+      - User Resource
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad Request
+      summary: Create User
+      tags:
+      - User Resource
+  /user/id/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      summary: Get User By Id
+      tags:
+      - User Resource
+  /user/page:
+    get:
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+      summary: Get Users By Page
+      tags:
+      - User Resource
+  /vehicle:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VehicleDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+        "400":
+          description: Bad Request
+      summary: Update Vehicle
+      tags:
+      - Vehicle Resource
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vehicle"
+      summary: Get Vehicles
+      tags:
+      - Vehicle Resource
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VehicleDTO"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Delete Vehicle
+      tags:
+      - Vehicle Resource
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VehicleDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+        "400":
+          description: Bad Request
+      summary: Create Vehicle
+      tags:
+      - Vehicle Resource
+  /vehicle/page:
+    get:
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vehicle"
+      summary: Get Vehicles By Page
+      tags:
+      - Vehicle Resource
+  /vehicle/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+      summary: Get Vehicle By Id
+      tags:
+      - Vehicle Resource
+info:
+  title: vbs API
+  version: 1.0.0-SNAPSHOT
