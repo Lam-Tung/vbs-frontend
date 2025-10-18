@@ -6,6 +6,7 @@
         "daygrid",
         "fullcalendar",
         "scrollgrid",
-        "timegrid"
+        "timegrid",
+        "VITE"
     ]
 }

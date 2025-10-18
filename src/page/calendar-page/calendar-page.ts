@@ -1,11 +1,16 @@
 import { Calendar, DateSelectArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
+import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import scrollgridPlugin from "@fullcalendar/scrollgrid";
 import timegridPlugin from "@fullcalendar/timegrid";
+import { BookingResourceService, UserResourceService } from "../../api";
+import { resolve } from "aurelia";
 
 export class CalendarPage {
+  // DI
+  private bookingResourceService: BookingResourceService = resolve(BookingResourceService);
+  // Properties
   calendarEl: HTMLElement | null = null;
   calendar: Calendar | null = null;
 

@@ -1,6 +1,9 @@
-import Aurelia from 'aurelia';
 import { RouterConfiguration } from '@aurelia/router';
+import Aurelia from 'aurelia';
+import { OpenAPI } from './api';
 import { MyApp } from './my-app';
+
+OpenAPI.BASE = import.meta.env.VITE_API_URL;
 
 Aurelia
   .register(RouterConfiguration)

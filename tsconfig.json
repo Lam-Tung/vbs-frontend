@@ -10,7 +10,8 @@
     "sourceMap": true
   },
   "include": [
-    "src"
+    "src",
+    "vite-env.d.ts"
   ],
   "files": [
     "src/resource.d.ts"
