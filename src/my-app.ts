@@ -8,9 +8,9 @@ import { route } from '@aurelia/router';
       title: 'Calendar',
     },
      {
-      path: 'vehicle',
+      path: 'vehicles',
       component: import('./page/vehicle-page/vehicle-page'),
-      title: 'Vehicle',
+      title: 'Vehicles',
     },
     {
       path: 'about',
