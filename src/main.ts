@@ -2,6 +2,7 @@ import { RouterConfiguration } from '@aurelia/router';
 import Aurelia from 'aurelia';
 import { OpenAPI } from './api';
 import { MyApp } from './my-app';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 OpenAPI.BASE = import.meta.env.VITE_API_URL;
 

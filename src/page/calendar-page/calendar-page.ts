@@ -5,18 +5,28 @@ import listPlugin from "@fullcalendar/list";
 import scrollgridPlugin from "@fullcalendar/scrollgrid";
 import timegridPlugin from "@fullcalendar/timegrid";
 import { BookingResourceService, UserResourceService } from "../../api";
-import { resolve } from "aurelia";
+import { EventAggregator, IDisposable, IEventAggregator, resolve } from "aurelia";
+import { E } from "@fullcalendar/core/internal-common";
+import { SEARCH_BAR_EVENT } from "../../ea-events";
 
 export class CalendarPage {
   // DI
-  private bookingResourceService: BookingResourceService = resolve(BookingResourceService);
+  private readonly bookingResourceService: BookingResourceService = resolve(
+    BookingResourceService
+  );
+  private readonly ea: IEventAggregator = resolve(IEventAggregator);
   // Properties
   calendarEl: HTMLElement | null = null;
   calendar: Calendar | null = null;
+  disposables: IDisposable[] = [];
 
   constructor() {}
 
-  async attached() {
+  async bound(): Promise<void> {
+   
+  }
+
+  async attached(): Promise<void> {
     await this.initCalendar();
   }
 
@@ -24,10 +34,15 @@ export class CalendarPage {
     await this.destroyCalendar();
   }
 
+  async unbinding(): Promise<void> {
+    this.disposables.forEach((d: IDisposable) => d.dispose());
+    this.disposables = [];
+  }
+
   /**
    * Initialize the FullCalendar instance.
    */
-  async initCalendar(): Promise<void> {
+  private async initCalendar(): Promise<void> {
     this.calendarEl = document.getElementById("vbs-calendar");
     if (!this.calendarEl) {
       console.error("Calendar element not found");
@@ -47,7 +62,7 @@ export class CalendarPage {
       headerToolbar: {
         left: "prev,next today",
         center: "title",
-        right: "dayGridMonth,dayGridWeek,dayGridDay",
+        right: "timeGridWeek,timeGridDay",
       },
       events: [],
     });
@@ -59,14 +74,17 @@ export class CalendarPage {
   /**
    * Cleanup the FullCalendar instance including all handlers.
    */
-  async destroyCalendar(): Promise<void> {
+  private async destroyCalendar(): Promise<void> {
     if (this.calendar) {
       this.calendar.destroy();
       this.calendar = null;
     }
   }
 
-  async initCalendarHandlers(): Promise<void> {
+  /**
+   * Initialize calendar event handlers.
+   */
+  private async initCalendarHandlers(): Promise<void> {
     if (!this.calendar) {
       console.error("Calendar not initialized");
       return;

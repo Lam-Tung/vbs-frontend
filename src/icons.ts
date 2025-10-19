@@ -1,0 +1,1 @@
+export const SEARCH_ICON = "fa-solid fa-magnifying-glass";

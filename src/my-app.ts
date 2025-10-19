@@ -7,6 +7,11 @@ import { route } from '@aurelia/router';
       component: import('./page/calendar-page/calendar-page'),
       title: 'Calendar',
     },
+     {
+      path: 'vehicle',
+      component: import('./page/vehicle-page/vehicle-page'),
+      title: 'Vehicle',
+    },
     {
       path: 'about',
       component: import('./page/about-page/about-page'),

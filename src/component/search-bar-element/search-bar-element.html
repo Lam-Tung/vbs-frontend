@@ -1,0 +1,6 @@
+<import from="./search-bar-element.scss"></import>
+
+<div class="search-bar-container">
+    <i class="${searchIcon} search-icon"></i>
+    <input type="text" value.bind="query" placeholder="Search..." input.trigger="onInput($event.target.value) & debounce:300"">
+</div>

@@ -1,0 +1,27 @@
+.search-bar-container {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+
+  input {
+    padding-left: 30px; /* Make space for the icon */
+    height: 24px;
+    border: 2px solid var(--grey);
+    border-radius: var(--border-radius);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+}

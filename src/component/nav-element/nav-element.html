@@ -1,7 +1,14 @@
-<require from="./nav-element.scss"></require>
+<import from="./nav-element.scss"></import>
 
 <nav class="nav-container">
   <img class="vbs-logo" src="/static/vbs-icon.png" alt="vbs logo" />
-  <a href="calendar">Calendar</a>
-  <a href="about">About</a>
+  <a href="calendar" class.bind="activeLink === 'calendar' ? 'active' : ''" click.trigger="setActive('calendar')">
+    Calendar
+  </a>
+  <a href="vehicle" class.bind="activeLink === 'vehicle' ? 'active' : ''" click.trigger="setActive('vehicle')">
+    Vehicles
+  </a>
+  <a href="about" class.bind="activeLink === 'about' ? 'active' : ''" click.trigger="setActive('about')">
+    About
+  </a>
 </nav>
