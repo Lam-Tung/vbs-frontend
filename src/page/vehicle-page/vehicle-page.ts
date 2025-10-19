@@ -61,12 +61,22 @@ export class VehiclePage {
       data: this.vehicles,
       layout: "fitColumns",
       columns: [
-        { title: "ID", field: "id", width: 50 },
         { title: "Name", field: "name" },
         { title: "License plate", field: "licensePlate" },
         { title: "Manufacturer", field: "manufacturer" },
         { title: "Model", field: "model" },
       ],
+      selectableRows: true,
+      rowHeader: {
+        formatter: "rowSelection",
+        titleFormatter: "rowSelection",
+        width: 40,
+        headerSort: false,
+        resizable: false,
+        frozen: true,
+        headerHozAlign: "center",
+        hozAlign: "center",
+      },
     });
 
     return vehicleTable;
