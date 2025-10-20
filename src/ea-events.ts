@@ -1,1 +1,0 @@
-export const SEARCH_BAR_EVENT: string = "event:search-bar";

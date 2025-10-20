@@ -6,9 +6,10 @@
 
   input {
     padding-left: 30px; /* Make space for the icon */
-    height: 24px;
+    height: var(--input-height);
     border: 2px solid var(--grey);
     border-radius: var(--border-radius);
+    box-sizing: border-box;
 
     &:focus {
       outline: none;

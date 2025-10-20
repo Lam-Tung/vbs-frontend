@@ -1,0 +1,23 @@
+.negative-button {
+  all: unset;
+  height: var(--input-height);
+  background-color: var(--white);
+  color: var(--main-color);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--main-color);
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  padding: 4px 16px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: var(--hover-color);
+    color: var(--text-color-primary);
+  }
+
+  &:active {
+    background-color: var(--text-color-primary);
+    color: var(--white);
+  }
+}

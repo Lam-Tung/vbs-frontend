@@ -1,0 +1,1 @@
+export const SEARCH_BAR_EVENT: string = "ea-event:search-bar";

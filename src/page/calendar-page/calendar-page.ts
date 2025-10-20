@@ -4,16 +4,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import scrollgridPlugin from "@fullcalendar/scrollgrid";
 import timegridPlugin from "@fullcalendar/timegrid";
-import { BookingResourceService, UserResourceService } from "../../api";
-import { EventAggregator, IDisposable, IEventAggregator, resolve } from "aurelia";
-import { E } from "@fullcalendar/core/internal-common";
-import { SEARCH_BAR_EVENT } from "../../ea-events";
+import { IDisposable, IEventAggregator, resolve } from "aurelia";
+import { BookingResourceService } from "~api/services/BookingResourceService";
 
 export class CalendarPage {
   // DI
-  private readonly bookingResourceService: BookingResourceService = resolve(
-    BookingResourceService
-  );
+  private readonly bookingResourceService: BookingResourceService = resolve(BookingResourceService);
   private readonly ea: IEventAggregator = resolve(IEventAggregator);
   // Properties
   calendarEl: HTMLElement | null = null;

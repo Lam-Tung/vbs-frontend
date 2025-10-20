@@ -1,13 +1,10 @@
 import { IDisposable, IEventAggregator, resolve } from "aurelia";
 import { TabulatorFull as Tabulator } from "tabulator-tables";
-import { VehicleDTO, VehicleResourceService } from "../../api";
-import { SEARCH_BAR_EVENT } from "../../ea-events";
-
+import { VehicleDTO } from "~api/models/VehicleDTO";
+import { VehicleResourceService } from "~api/services/VehicleResourceService";
+import { SEARCH_BAR_EVENT } from "~event/ea-events";
 export class VehiclePage {
   // DI
-  private readonly vehicleResourceService: VehicleResourceService = resolve(
-    VehicleResourceService
-  );
   private readonly ea: IEventAggregator = resolve(IEventAggregator);
   // Properties
   vehicles: VehicleDTO[] = [];

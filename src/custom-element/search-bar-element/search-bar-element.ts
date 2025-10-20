@@ -1,6 +1,11 @@
-import { bindable, customElement, IEventAggregator, resolve } from "aurelia";
-import { SEARCH_BAR_EVENT } from "../../ea-events";
-import { SEARCH_ICON } from "../../icons";
+import {
+  bindable,
+  customElement,
+  IEventAggregator,
+  resolve
+} from "aurelia";
+import { SEARCH_BAR_EVENT } from "~event/ea-events";
+import { SEARCH_ICON } from "~resources/icons";
 
 @customElement("search-bar-element")
 export class SearchBarElement {
