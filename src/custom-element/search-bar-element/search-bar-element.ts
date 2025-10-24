@@ -6,7 +6,7 @@ import {
   resolve
 } from "aurelia";
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
-import { SEARCH_ICON } from "~resources/icons";
+import { SEARCH_ICON, X_ICON } from "~resources/icons";
 
 @customElement("search-bar-element")
 export class SearchBarElement {
@@ -17,12 +17,19 @@ export class SearchBarElement {
   @bindable query = "";
   // Icons
   searchIcon: string = SEARCH_ICON;
+  xIcon: string = X_ICON;
 
   constructor() {}
 
-  onInput(value: string): void {
+  async onInput(value: string): Promise<void> {
     this.query = value;
     this.logger.debug("Search query input:", value);
     this.ea.publish(SEARCH_BAR_EVENT, value);
+  }
+
+  async clearQuery(): Promise<void> {
+    this.query = "";
+    this.logger.debug("Search query cleared");
+    this.ea.publish(SEARCH_BAR_EVENT, this.query);
   }
 }

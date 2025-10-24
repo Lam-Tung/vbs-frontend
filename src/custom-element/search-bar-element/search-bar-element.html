@@ -3,4 +3,5 @@
 <div class="search-bar-container">
     <i class="${searchIcon} search-icon"></i>
     <input type="text" value.bind="query" placeholder="Search..." input.trigger="onInput($event.target.value) & debounce:300"">
+    <span if.bind="query?.length" click.trigger="clearQuery()"><i class="${xIcon} x-icon"></i></span>
 </div>

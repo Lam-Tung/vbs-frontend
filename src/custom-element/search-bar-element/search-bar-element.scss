@@ -5,7 +5,8 @@
   display: inline-block;
 
   input {
-    padding-left: 30px; /* Make space for the icon */
+    padding-left: 30px;
+    padding-right: 30px;
     height: var(--input-height);
     border: 2px solid var(--grey);
     border-radius: var(--border-radius);
@@ -24,5 +25,20 @@
     color: var(--grey);
     pointer-events: none;
     font-size: 1rem;
+  }
+
+  .x-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey);
+    cursor: pointer;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: var(--grey);
+      scale: var(--hover-scale);
+    }
   }
 }

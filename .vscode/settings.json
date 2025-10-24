@@ -10,6 +10,7 @@
         "fullcalendar",
         "scrollgrid",
         "timegrid",
-        "VITE"
+        "VITE",
+        "xmark"
     ]
 }
