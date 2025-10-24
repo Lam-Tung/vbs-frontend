@@ -11,6 +11,7 @@
     "baseUrl": ".",
     "paths": {
       "~api/*": ["src/api/*"],
+      "~dialog/*": ["src/dialog/*"],
       "~custom-element/*": ["src/custom-element/*"],
       "~event/*": ["src/event/*"],
       "~page/*": ["src/page/*"],

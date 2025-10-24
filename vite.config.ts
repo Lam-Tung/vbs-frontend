@@ -20,6 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "~api": fileURLToPath(new URL("./src/api", import.meta.url)),
+      "~dialog": fileURLToPath(new URL("./src/dialog", import.meta.url)),
       "~custom-element": fileURLToPath(
         new URL("./src/custom-element", import.meta.url)
       ),

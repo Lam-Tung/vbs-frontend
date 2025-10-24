@@ -8,7 +8,7 @@ export class NegativeButton {
   // Properties
   @bindable() label = "Cancel";
 
-  handleClick() {
+  onClick() {
     this.element.dispatchEvent(
       new CustomEvent(NEGATIVE_BUTTON_CLICKED, { bubbles: true })
     );

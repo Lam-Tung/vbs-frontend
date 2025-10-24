@@ -1,17 +1,20 @@
-import { IDisposable, IEventAggregator, resolve } from "aurelia";
+import { DialogCloseResult, IDialogService } from "@aurelia/dialog";
+import { IDisposable, IEventAggregator, ILogger, resolve } from "aurelia";
 import { TabulatorFull as Tabulator } from "tabulator-tables";
 import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
+import { VehicleDialog } from "~dialog/vehicle-dialog/vehicle-dialog";
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
+
 export class VehiclePage {
   // DI
+  private readonly logger = resolve(ILogger).scopeTo("VehiclePage");
   private readonly ea: IEventAggregator = resolve(IEventAggregator);
+  private readonly dialogService: IDialogService = resolve(IDialogService);
   // Properties
   vehicles: VehicleDTO[] = [];
   vehicleTable: Tabulator | null = null;
   disposables: IDisposable[] = [];
-
-  constructor() {}
 
   async bound(): Promise<void> {
     this.disposables.push(
@@ -105,5 +108,20 @@ export class VehiclePage {
     });
     // Apply an OR filter across all columns
     this.vehicleTable.setFilter([filters]);
+  }
+
+  async addVehicle(): Promise<void> {
+    this.logger.debug("Add vehicle triggered");
+    const { dialog } = await this.dialogService.open({
+      component: () => VehicleDialog,
+      model: {},
+    });
+    const result: DialogCloseResult = await dialog.closed;
+
+    if (result.status !== "ok") return;
+    if (!result.value) return;
+    const newVehicle: VehicleDTO = result.value as VehicleDTO;
+    this.vehicles.push(newVehicle);
+    this.vehicleTable?.addData([newVehicle]);
   }
 }

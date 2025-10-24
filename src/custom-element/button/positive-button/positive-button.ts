@@ -8,7 +8,7 @@ export class PositiveButton {
   // Properties
   @bindable() label = "OK";
 
-  handleClick() {
+  onClick() {
     this.element.dispatchEvent(new CustomEvent(POSITIVE_BUTTON_CLICKED, { bubbles: true }));
   }
 }
