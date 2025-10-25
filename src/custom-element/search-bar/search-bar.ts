@@ -19,8 +19,6 @@ export class SearchBar {
   searchIcon: string = SEARCH_ICON;
   xIcon: string = X_ICON;
 
-  constructor() {}
-
   async onInput(value: string): Promise<void> {
     this.query = value;
     this.logger.debug("Search query input:", value);

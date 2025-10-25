@@ -114,12 +114,12 @@ export class VehiclePage {
     this.logger.debug("Add vehicle triggered");
     const { dialog } = await this.dialogService.open({
       component: () => VehicleDialog,
-      model: {},
     });
     const result: DialogCloseResult = await dialog.closed;
 
     if (result.status !== "ok") return;
     if (!result.value) return;
+    this.logger.debug("Dialog returned vehicle:", result.value);
     const newVehicle: VehicleDTO = result.value as VehicleDTO;
     this.vehicles.push(newVehicle);
     this.vehicleTable?.addData([newVehicle]);

@@ -1,0 +1,22 @@
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  label {
+    padding-left: 6px;
+    font-size: 0.7rem;
+  }
+
+  input {
+    padding: 0 10px;
+    height: var(--input-height);
+    border: 2px solid var(--grey);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
