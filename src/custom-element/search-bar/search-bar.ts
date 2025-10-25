@@ -8,8 +8,8 @@ import {
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
 import { SEARCH_ICON, X_ICON } from "~resources/icons";
 
-@customElement("search-bar-element")
-export class SearchBarElement {
+@customElement("search-bar")
+export class SearchBar {
   // DI
   private readonly logger = resolve(ILogger).scopeTo('SearchBarElement');
   private readonly ea: IEventAggregator = resolve(IEventAggregator);

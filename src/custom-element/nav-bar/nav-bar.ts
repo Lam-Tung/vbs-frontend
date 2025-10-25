@@ -1,7 +1,7 @@
 import { customElement, ILogger, resolve } from "aurelia";
 
-@customElement("nav-element")
-export class NavElement {
+@customElement("nav-bar")
+export class NavBar {
   // DI
   private readonly logger = resolve(ILogger).scopeTo('NavElement');
   // Properties
