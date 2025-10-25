@@ -8,10 +8,6 @@ export type VehicleDTO = {
      */
     id?: number | null;
     /**
-     * The Vehicle Identification Number
-     */
-    vin?: string | null;
-    /**
      * The license plate of the vehicle
      */
     licensePlate?: string | null;

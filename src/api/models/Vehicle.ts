@@ -5,7 +5,6 @@
 import type { LocalDateTime } from './LocalDateTime';
 export type Vehicle = {
     id?: number | null;
-    vin?: string | null;
     licensePlate?: string | null;
     name?: string | null;
     manufacturer?: string | null;

@@ -144,10 +144,6 @@ components:
           - integer
           - "null"
           format: int64
-        vin:
-          type:
-          - string
-          - "null"
         licensePlate:
           type:
           - string
@@ -182,12 +178,6 @@ components:
           format: int64
           description: The unique identifier of the vehicle
           default: 1
-        vin:
-          type:
-          - string
-          - "null"
-          description: The Vehicle Identification Number
-          default: JT6HF10U3Y0133607
         licensePlate:
           type:
           - string
