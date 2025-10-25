@@ -2,6 +2,7 @@ import { IDialogController, IDialogCustomElementViewModel } from "@aurelia/dialo
 import { ILogger, resolve } from "aurelia";
 import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
+import { X_ICON } from "~resources/icons";
 
 export class VehicleDialog implements IDialogCustomElementViewModel{
     // DI
@@ -10,6 +11,8 @@ export class VehicleDialog implements IDialogCustomElementViewModel{
     // Properties
     $dialog: IDialogController;
     vehicleDTO: VehicleDTO | null = null;
+    // Icons
+    xIcon: string = X_ICON;
 
     async activate(model: VehicleDTO) {
         this.vehicleDTO = model;
@@ -23,6 +26,11 @@ export class VehicleDialog implements IDialogCustomElementViewModel{
     
     async negativeClicked(): Promise<void> {
         this.logger.debug("Negative clicked, cancelling dialog.");
+        this.$dialog.cancel();
+    }
+
+    async closeClicked(): Promise<void> {
+        this.logger.debug("Close clicked, cancelling dialog.");
         this.$dialog.cancel();
     }
 }

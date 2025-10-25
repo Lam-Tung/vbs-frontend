@@ -1,9 +1,15 @@
 <import from="./vehicle-dialog.scss"></import>
 
-<div class="dialog-header">Hallo</div>
+<!-- header -->
+<div class="dialog-header">
+    Create new vehicle
+    <i class="${xIcon} x-icon" click.trigger="closeClicked()"></i>
+</div>
+<!-- body -->
 <div class="dialog-body">
     Vehicle Dialog Content
 </div>
+<!-- footer -->
 <div class="dialog-footer">
     <positive-button label="Save" positive-button-clicked.trigger="positiveClicked()"></positive-button>
     <negative-button label="Cancel" negative-button-clicked.trigger="negativeClicked()"></negative-button>
