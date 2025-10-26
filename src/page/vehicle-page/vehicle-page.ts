@@ -134,7 +134,8 @@ export class VehiclePage {
     this.logger.debug("Dialog returned vehicle:", result.value);
     // Persist the new vehicle via the API
     const newVehicleDTO: VehicleDTO = result.value as VehicleDTO;
-    await VehicleResourceService.postVehicle(newVehicleDTO);
+    const newVehicle = await VehicleResourceService.postVehicle(newVehicleDTO);
+    newVehicleDTO.id = newVehicle.id;
     // Add the new vehicle to the list and table
     this.vehicles.push(newVehicleDTO);
     this.vehicleTable?.addData([newVehicleDTO]);
