@@ -6,7 +6,8 @@ export class NegativeButton {
   // DI
   private readonly element = resolve(Element);
   // Properties
-  @bindable() label = "Cancel";
+  @bindable() label: string = "Cancel";
+  @bindable() icon: string = null;
 
   onClick() {
     this.element.dispatchEvent(

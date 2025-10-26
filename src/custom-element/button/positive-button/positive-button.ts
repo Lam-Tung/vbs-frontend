@@ -6,7 +6,8 @@ export class PositiveButton {
   // DI
   private readonly element = resolve(Element);
   // Properties
-  @bindable() label = "OK";
+  @bindable() label: string = "OK";
+  @bindable() icon: string = null;
 
   onClick() {
     this.element.dispatchEvent(new CustomEvent(POSITIVE_BUTTON_CLICKED, { bubbles: true }));

@@ -2,5 +2,5 @@
 
 <button class="negative-button"
     click.trigger="onClick()">
-    ${label}
+    <span if.bind="icon"><i class="${icon}"></i></span> ${label}
 </button>
