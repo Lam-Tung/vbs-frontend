@@ -5,10 +5,13 @@
     <div class="vehicle-header">
         <search-bar></search-bar>
         <div class="button-layout">
-            <positive-button if.bind="selectedVehicle" icon="${editIcon}" label="Edit vehicle"
+            <delete-button if.bind="selectedVehicle" icon="${deleteIcon}" label="Delete"
+                delete-button-clicked.trigger="deleteVehicle()">
+            </delete-button>
+            <positive-button if.bind="selectedVehicle" icon="${editIcon}" label="Edit"
                 positive-button-clicked.trigger="editVehicle()">
             </positive-button>
-            <positive-button icon="${addIcon}" label="Add vehicle" positive-button-clicked.trigger="addVehicle()">
+            <positive-button icon="${addIcon}" label="Add" positive-button-clicked.trigger="addVehicle()">
             </positive-button>
         </div>
 

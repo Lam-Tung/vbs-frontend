@@ -5,7 +5,7 @@ import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
 import { VehicleDialog } from "~dialog/vehicle-dialog/vehicle-dialog";
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
-import { ADD_ICON, EDIT_ICON } from "~resources/icons";
+import { ADD_ICON, DELETE_ICON, EDIT_ICON } from "~resources/icons";
 
 export class VehiclePage {
   // DI
@@ -20,6 +20,7 @@ export class VehiclePage {
   // Icons
   addIcon: string = ADD_ICON;
   editIcon: string = EDIT_ICON;
+  deleteIcon: string = DELETE_ICON;
 
   async bound(): Promise<void> {
     this.disposables.push(
@@ -138,6 +139,10 @@ export class VehiclePage {
     this.vehicleTable?.addData([newVehicleDTO]);
   }
 
+  /**
+   * Edits the selected vehicle by opening a dialog and persisting the changes.
+   * @returns void
+   */
   async editVehicle(): Promise<void> {
     this.logger.debug("Edit vehicle triggered");
     if (!this.selectedVehicle) return;
@@ -151,10 +156,25 @@ export class VehiclePage {
     const updatedVehicle: VehicleDTO = result.value as VehicleDTO;
     await VehicleResourceService.putVehicle(updatedVehicle);
     // Update vehicle in list and table
-    const idx = this.vehicles.findIndex((v) => v.id === updatedVehicle.id);
+    const idx = this.vehicles.findIndex(
+      (v: VehicleDTO) => v.id === updatedVehicle.id
+    );
     if (idx !== -1) {
       this.vehicles[idx] = updatedVehicle;
       this.vehicleTable?.updateData([updatedVehicle]);
     }
+  }
+
+  async deleteVehicle(): Promise<void> {
+    this.logger.debug("Delete vehicle triggered");
+    if (!this.selectedVehicle) return;
+    // Delete vehicle via API
+    await VehicleResourceService.deleteVehicle(this.selectedVehicle);
+    // Remove vehicle from list and table
+    this.vehicles = this.vehicles.filter(
+      (v: VehicleDTO) => v.id !== this.selectedVehicle?.id
+    );
+    this.vehicleTable?.deleteRow(this.selectedVehicle.id);
+    this.selectedVehicle = null;
   }
 }
