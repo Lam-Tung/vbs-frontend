@@ -168,7 +168,7 @@ export class VehiclePage {
   }
 
   /**
-   * 
+   * Deletes the selected vehicle after confirmation.
    * @returns void
    */
   async deleteVehicle(): Promise<void> {
