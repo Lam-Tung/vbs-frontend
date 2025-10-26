@@ -1,22 +1,19 @@
 <import from="../dialog.scss"></import>
-<import from="./vehicle-dialog.scss"></import>
+<import from="./confirm-dialog.scss"></import>
 
-<div class="vehicle-dialog-container">
+<div class="confirm-dialog-container">
     <!-- header -->
     <div class="dialog-header">
-        Create new vehicle
+        ${data.title}
         <i class="${xIcon} x-icon" click.trigger="closeClicked()"></i>
     </div>
     <!-- body -->
     <div class="dialog-body">
-        <text-input label="Name" value.bind="vehicleDTO.name"></text-input>
-        <text-input label="Manufacturer" value.bind="vehicleDTO.manufacturer"></text-input>
-        <text-input label="License plate" value.bind="vehicleDTO.licensePlate"></text-input>
-        <text-input label="Model" value.bind="vehicleDTO.model"></text-input>
+        ${data.message}
     </div>
     <!-- footer -->
     <div class="dialog-footer">
-        <positive-button icon="${saveIcon}" label="Save"
+        <positive-button icon="${confirmIcon}" label="Confirm"
             positive-button-clicked.trigger="positiveClicked()"></positive-button>
         <negative-button icon="${cancelIcon}" label="Cancel"
             negative-button-clicked.trigger="negativeClicked()"></negative-button>

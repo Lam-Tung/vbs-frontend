@@ -1,6 +1,7 @@
 <import from="./positive-button.scss"></import>
 
-<button class="positive-button"
-    click.trigger="onClick()">
-    <span if.bind="icon"><i class="${icon}"></i></span> ${label}
-</button>
+<div class="positive-button-container">
+    <button class="positive-button" click.trigger="onClick()">
+        <span if.bind="icon"><i class="${icon}"></i></span> ${label}
+    </button>
+</div>

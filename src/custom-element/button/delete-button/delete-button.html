@@ -1,6 +1,7 @@
 <import from="./delete-button.scss"></import>
 
-<button class="delete-button"
-    click.trigger="onClick()">
-    <span if.bind="icon"><i class="${icon}"></i></span> ${label}
-</button>
+<div class="delete-button-container">
+    <button class="delete-button" click.trigger="onClick()">
+        <span if.bind="icon"><i class="${icon}"></i></span> ${label}
+    </button>
+</div>

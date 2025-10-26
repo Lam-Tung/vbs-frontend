@@ -3,6 +3,7 @@ import { IDisposable, IEventAggregator, ILogger, resolve } from "aurelia";
 import { TabulatorFull as Tabulator } from "tabulator-tables";
 import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
+import { ConfirmDialog } from "~dialog/confirm-dialog/confirm-dialog";
 import { VehicleDialog } from "~dialog/vehicle-dialog/vehicle-dialog";
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
 import { ADD_ICON, DELETE_ICON, EDIT_ICON } from "~resources/icons";
@@ -165,9 +166,22 @@ export class VehiclePage {
     }
   }
 
+  /**
+   * 
+   * @returns void
+   */
   async deleteVehicle(): Promise<void> {
     this.logger.debug("Delete vehicle triggered");
     if (!this.selectedVehicle) return;
+    const { dialog } = await this.dialogService.open({
+      component: () => ConfirmDialog,
+      model: {
+        title: "Delete Vehicle",
+        message: `Are you sure you want to delete vehicle "${this.selectedVehicle.name}"? This action cannot be undone.`,
+      },
+    });
+    const result: DialogCloseResult = await dialog.closed;
+    if (result.status !== "ok") return;
     // Delete vehicle via API
     await VehicleResourceService.deleteVehicle(this.selectedVehicle);
     // Remove vehicle from list and table
