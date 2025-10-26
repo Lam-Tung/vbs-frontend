@@ -2,6 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .button-layout {
+    display: flex;
+    gap: 10px;
+  }
 }
 
 #vehicle-table {

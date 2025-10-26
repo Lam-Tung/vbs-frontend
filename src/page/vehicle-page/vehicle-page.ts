@@ -5,6 +5,7 @@ import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
 import { VehicleDialog } from "~dialog/vehicle-dialog/vehicle-dialog";
 import { SEARCH_BAR_EVENT } from "~event/ea-events";
+import { ADD_ICON, EDIT_ICON } from "~resources/icons";
 
 export class VehiclePage {
   // DI
@@ -13,8 +14,12 @@ export class VehiclePage {
   private readonly dialogService: IDialogService = resolve(IDialogService);
   // Properties
   vehicles: VehicleDTO[] = [];
+  selectedVehicle: VehicleDTO | null = null;
   vehicleTable: Tabulator | null = null;
   disposables: IDisposable[] = [];
+  // Icons
+  addIcon: string = ADD_ICON;
+  editIcon: string = EDIT_ICON;
 
   async bound(): Promise<void> {
     this.disposables.push(
@@ -66,17 +71,18 @@ export class VehiclePage {
         { title: "Manufacturer", field: "manufacturer" },
         { title: "Model", field: "model" },
       ],
-      selectableRows: true,
-      rowHeader: {
-        formatter: "rowSelection",
-        titleFormatter: "rowSelection",
-        width: 40,
-        headerSort: false,
-        resizable: false,
-        frozen: true,
-        headerHozAlign: "center",
-        hozAlign: "center",
-      },
+      initialSort: [{ column: "name", dir: "asc" }],
+      selectableRows: 1,
+    });
+
+    // Listen to selection events
+    vehicleTable.on("rowSelected", (row: { getData: () => VehicleDTO }) => {
+      this.selectedVehicle = row.getData();
+      this.logger.debug("Selected vehicle:", this.selectedVehicle);
+    });
+    vehicleTable.on("rowDeselected", () => {
+      this.selectedVehicle = null;
+      this.logger.debug("Deselected vehicle");
     });
 
     return vehicleTable;
@@ -110,6 +116,10 @@ export class VehiclePage {
     this.vehicleTable.setFilter([filters]);
   }
 
+  /**
+   * Adds a new vehicle by opening a dialog and persisting the result.
+   * @returns void
+   */
   async addVehicle(): Promise<void> {
     this.logger.debug("Add vehicle triggered");
     const { dialog } = await this.dialogService.open({
@@ -120,8 +130,31 @@ export class VehiclePage {
     if (result.status !== "ok") return;
     if (!result.value) return;
     this.logger.debug("Dialog returned vehicle:", result.value);
-    const newVehicle: VehicleDTO = result.value as VehicleDTO;
-    this.vehicles.push(newVehicle);
-    this.vehicleTable?.addData([newVehicle]);
+    // Persist the new vehicle via the API
+    const newVehicleDTO: VehicleDTO = result.value as VehicleDTO;
+    await VehicleResourceService.postVehicle(newVehicleDTO);
+    // Add the new vehicle to the list and table
+    this.vehicles.push(newVehicleDTO);
+    this.vehicleTable?.addData([newVehicleDTO]);
+  }
+
+  async editVehicle(): Promise<void> {
+    this.logger.debug("Edit vehicle triggered");
+    if (!this.selectedVehicle) return;
+    const { dialog } = await this.dialogService.open({
+      component: () => VehicleDialog,
+      model: this.selectedVehicle,
+    });
+    const result: DialogCloseResult = await dialog.closed;
+    if (result.status !== "ok" || !result.value) return;
+    // Persist the updated vehicle via the API
+    const updatedVehicle: VehicleDTO = result.value as VehicleDTO;
+    await VehicleResourceService.putVehicle(updatedVehicle);
+    // Update vehicle in list and table
+    const idx = this.vehicles.findIndex((v) => v.id === updatedVehicle.id);
+    if (idx !== -1) {
+      this.vehicles[idx] = updatedVehicle;
+      this.vehicleTable?.updateData([updatedVehicle]);
+    }
   }
 }

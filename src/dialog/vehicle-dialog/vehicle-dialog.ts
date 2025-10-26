@@ -5,7 +5,7 @@ import {
 import { ILogger, resolve } from "aurelia";
 import { VehicleDTO } from "~api/models/VehicleDTO";
 import { VehicleResourceService } from "~api/services/VehicleResourceService";
-import { X_ICON } from "~resources/icons";
+import { CANCEL_ICON, SAVE_ICON, X_ICON } from "~resources/icons";
 
 export class VehicleDialog implements IDialogCustomElementViewModel {
   // DI
@@ -18,6 +18,8 @@ export class VehicleDialog implements IDialogCustomElementViewModel {
   vehicleDTO: VehicleDTO | null = null;
   // Icons
   xIcon: string = X_ICON;
+  saveIcon: string = SAVE_ICON;
+  cancelIcon: string = CANCEL_ICON;
 
   async activate(model: VehicleDTO) {
     this.vehicleDTO = model ?? {
