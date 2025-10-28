@@ -3,9 +3,9 @@ import { route } from '@aurelia/router';
 @route({
   routes: [
     {
-      path: ['', 'calendar'],
-      component: import('./page/calendar-page/calendar-page'),
-      title: 'Calendar',
+      path: ['', 'bookings'],
+      component: import('./page/booking-page/booking-page'),
+      title: 'Bookings',
     },
      {
       path: 'vehicles',
