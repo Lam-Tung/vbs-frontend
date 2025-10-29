@@ -1,16 +1,25 @@
 {
     "cSpell.words": [
+        "alldayevent",
+        "alldayheader",
         "Aygo",
         "Aygoya",
+        "Ccircle",
         "codegen",
+        "colheader",
+        "colmove",
+        "cornerright",
+        "Csvg",
         "datatables",
         "daygrid",
+        "daypilot",
         "fontawesome",
         "fortawesome",
         "fullcalendar",
         "scrollgrid",
         "timegrid",
         "VITE",
+        "withheader",
         "xmark"
     ]
 }
